@@ -1,0 +1,61 @@
+<head>
+  <title>lizard spock rock paper scissors</title>
+</head>
+
+<body>
+  {{> header}}
+</body>
+
+<template name="header">
+  <div>
+    {{loginButtons}}
+  </div>
+  <hr />
+  {{#if currentUser}}
+    <button class="new-game">Start new game</button>
+  {{/if}}
+
+  {{> games}}
+</template>
+
+<template name="games">
+  {{#each allGames}}
+    <div>
+      {{> player1Control}}
+      VS
+      {{> player2Control}}
+    </div>
+  {{/each}}
+</template>
+
+<template name="player1Control">
+  <span style="{{#if player1Winner}}text-decoration: underline;{{/if}}">
+    {{player1Name}}
+  </span>
+  ({{player1Move}})
+  {{#if canPlay1}}
+    <button class="rock1">rock</button>
+    <button class="paper1">paper</button>
+    <button class="scissors1">scissors</button>
+  {{/if}}
+</template>
+
+<template name="player2Control">
+  {{#if twoPlayers}}
+    <span style="{{#if player2Winner}}text-decoration: underline;{{/if}}">
+      {{player2Name}}
+    </span>
+    ({{player2Move}})
+    {{#if canPlay2}}
+      <button class="rock2">rock</button>
+      <button class="paper2">paper</button>
+      <button class="scissors2">scissors</button>
+    {{/if}}
+  {{else}}
+    {{#if canJoinGame}}
+      <button class="join-game">Join</button>
+    {{else}}
+      (waiting for partner)
+    {{/if}}
+  {{/if}}
+</template>
